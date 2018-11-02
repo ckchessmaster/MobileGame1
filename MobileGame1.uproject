@@ -1,0 +1,19 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{3E04EFA1-4555-EAB5-B508-3E845147DB71}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "MobileGame1",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "Paper2D",
+			"Enabled": true
+		}
+	]
+}
