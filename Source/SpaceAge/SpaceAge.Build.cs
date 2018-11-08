@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class MobileGame1 : ModuleRules
+public class SpaceAge : ModuleRules
 {
-	public MobileGame1(ReadOnlyTargetRules Target) : base(Target)
+	public SpaceAge(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 

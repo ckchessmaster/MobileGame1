@@ -1,6 +1,6 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
-#include "MobileGame1Character.h"
+#include "SpaceAgeCharacter.h"
 #include "PaperFlipbookComponent.h"
 #include "Components/TextRenderComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -13,9 +13,9 @@
 DEFINE_LOG_CATEGORY_STATIC(SideScrollerCharacter, Log, All);
 
 //////////////////////////////////////////////////////////////////////////
-// AMobileGame1Character
+// ASpaceAgeCharacter
 
-AMobileGame1Character::AMobileGame1Character()
+ASpaceAgeCharacter::ASpaceAgeCharacter()
 {
 	// Use only Yaw from the controller and ignore the rest of the rotation.
 	bUseControllerRotationPitch = false;
@@ -79,7 +79,7 @@ AMobileGame1Character::AMobileGame1Character()
 //////////////////////////////////////////////////////////////////////////
 // Animation
 
-void AMobileGame1Character::UpdateAnimation()
+void ASpaceAgeCharacter::UpdateAnimation()
 {
 	const FVector PlayerVelocity = GetVelocity();
 	const float PlayerSpeedSqr = PlayerVelocity.SizeSquared();
@@ -92,7 +92,7 @@ void AMobileGame1Character::UpdateAnimation()
 	}
 }
 
-void AMobileGame1Character::Tick(float DeltaSeconds)
+void ASpaceAgeCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	
@@ -103,18 +103,18 @@ void AMobileGame1Character::Tick(float DeltaSeconds)
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void AMobileGame1Character::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+void ASpaceAgeCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	// Note: the 'Jump' action and the 'MoveRight' axis are bound to actual keys/buttons/sticks in DefaultInput.ini (editable from Project Settings..Input)
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AMobileGame1Character::MoveRight);
+	PlayerInputComponent->BindAxis("MoveRight", this, &ASpaceAgeCharacter::MoveRight);
 
-	PlayerInputComponent->BindTouch(IE_Pressed, this, &AMobileGame1Character::TouchStarted);
-	PlayerInputComponent->BindTouch(IE_Released, this, &AMobileGame1Character::TouchStopped);
+	PlayerInputComponent->BindTouch(IE_Pressed, this, &ASpaceAgeCharacter::TouchStarted);
+	PlayerInputComponent->BindTouch(IE_Released, this, &ASpaceAgeCharacter::TouchStopped);
 }
 
-void AMobileGame1Character::MoveRight(float Value)
+void ASpaceAgeCharacter::MoveRight(float Value)
 {
 	/*UpdateChar();*/
 
@@ -122,19 +122,19 @@ void AMobileGame1Character::MoveRight(float Value)
 	AddMovementInput(FVector(1.0f, 0.0f, 0.0f), Value);
 }
 
-void AMobileGame1Character::TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location)
+void ASpaceAgeCharacter::TouchStarted(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
 	// Jump on any touch
 	Jump();
 }
 
-void AMobileGame1Character::TouchStopped(const ETouchIndex::Type FingerIndex, const FVector Location)
+void ASpaceAgeCharacter::TouchStopped(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
 	// Cease jumping once touch stopped
 	StopJumping();
 }
 
-void AMobileGame1Character::UpdateCharacter()
+void ASpaceAgeCharacter::UpdateCharacter()
 {
 	// Update animation to match the motion
 	UpdateAnimation();

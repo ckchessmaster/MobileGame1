@@ -4,18 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "MobileGame1GameMode.generated.h"
+#include "SpaceAgeGameMode.generated.h"
 
 /**
  * The GameMode defines the game being played. It governs the game rules, scoring, what actors
  * are allowed to exist in this game type, and who may enter the game.
  *
- * This game mode just sets the default pawn to be the MyCharacter asset, which is a subclass of MobileGame1Character
+ * This game mode just sets the default pawn to be the MyCharacter asset, which is a subclass of SpaceAgeCharacter
  */
 UCLASS(minimalapi)
-class AMobileGame1GameMode : public AGameModeBase
+class ASpaceAgeGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 public:
-	AMobileGame1GameMode();
+	ASpaceAgeGameMode();
 };

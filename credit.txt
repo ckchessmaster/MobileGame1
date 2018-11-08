@@ -1,0 +1,10 @@
+Sprites:
+
+scifi_space_rpg_tiles.png - Hyptosis - https://opengameart.org/content/space-scifi-rpg-tiles-48x48
+
+colony.png/colony-db32.png - Buch - http://blog-buch.rhcloud.com
+
+colony-extended.zip/colony-db32-extended.zip/colony-db-map-preview-tiled.zip - Buch/rubberduck - https://opengameart.org/content/colony-sim-extended-version
+
+plums.png - surt - https://opengameart.org/content/plums
+

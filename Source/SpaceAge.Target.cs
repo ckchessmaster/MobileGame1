@@ -3,11 +3,11 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class MobileGame1Target : TargetRules
+public class SpaceAgeTarget : TargetRules
 {
-	public MobileGame1Target(TargetInfo Target) : base(Target)
+	public SpaceAgeTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-		ExtraModuleNames.Add("MobileGame1");
+		ExtraModuleNames.Add("SpaceAge");
 	}
 }
