@@ -25,4 +25,8 @@ protected:
 	
 	/** Called for up and down input */
 	void MoveVertical(float value);
+
+public:
+
+	AShip();
 };
