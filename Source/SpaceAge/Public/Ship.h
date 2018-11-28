@@ -18,15 +18,16 @@ class SPACEAGE_API AShip : public APaperCharacter
 protected:
 
 	// Used to scale input movement
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Movement")
 	float MovementMultiplier = 1.0f;
-
-	/** Called for side to side input */
-	void MoveHorizontal(float value);
-	
-	/** Called for up and down input */
-	void MoveVertical(float value);
 
 public:
 
 	AShip();
+
+	/** Called for side to side input */
+	virtual void MoveHorizontal(float value);
+
+	/** Called for up and down input */
+	virtual void MoveVertical(float value);
 };

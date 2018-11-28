@@ -1,9 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Public/Ship.h"
+#include "Ship.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/CapsuleComponent.h"
 
-AShip::AShip()
+AShip::AShip() : Super()
 {
 	// Ships should stop as soon as input ends
 	UCharacterMovementComponent* movementComponent = (UCharacterMovementComponent*)this->GetMovementComponent();
@@ -15,6 +16,9 @@ AShip::AShip()
 	this->bUseControllerRotationRoll = false;
 	this->bUseControllerRotationYaw = false;
 	this->SetActorRotation(FRotator(0.0f, -90.0f, 90.0f));
+
+	// Setup collision
+	this->GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 }
 
 void AShip::MoveHorizontal(float value) 
