@@ -25,10 +25,8 @@ void AEnemyAI001::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	AEnemyShipBase* ship = Cast<AEnemyShipBase>(this->GetCharacter());
-
 	// We want to move every tick
-	ship->MoveHorizontal(this->MovementVector.Y);
+	this->GetShip()->MoveHorizontal(this->MovementVector.Y);
 
 	// Determine if we should change direction
 	if (FMath::RandRange(0, this->DirectionChangeFactor) == 1) 
@@ -54,5 +52,5 @@ void AEnemyAI001::OnShipHit(AActor* SelfActor, AActor* OtherActor, FVector Norma
 
 void AEnemyAI001::Fire()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Green, "Pew Pew");
+	Super::Fire();
 }

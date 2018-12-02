@@ -7,3 +7,16 @@ void APrimaryPlayerShip::SetupPlayerInputComponent(class UInputComponent* Player
 	PlayerInputComponent->BindAxis("MoveHorizontal", this, &APrimaryPlayerShip::MoveHorizontal);
 	PlayerInputComponent->BindAxis("MoveVertical", this, &APrimaryPlayerShip::MoveVertical);
 }
+
+void APrimaryPlayerShip::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (this->TicksSinceLastAttack >= this->TicksBetweenAttacks) {
+		this->GetWeaponComponent()->Fire(FVector2D(1.0f, 0.0f), TEXT("Player"));
+		this->TicksSinceLastAttack = 0;
+	}
+	else {
+		this->TicksSinceLastAttack++;
+	}
+}

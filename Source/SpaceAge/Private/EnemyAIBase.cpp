@@ -9,8 +9,7 @@ void AEnemyAIBase::BeginPlay()
 	Super::BeginPlay();
 
 	// Start listening to ships overlap events
-	AEnemyShipBase* ship = Cast<AEnemyShipBase>(this->GetCharacter());
-	ship->OnActorHit.AddDynamic(this, &AEnemyAIBase::OnShipHit);
+	this->GetShip()->OnActorHit.AddDynamic(this, &AEnemyAIBase::OnShipHit);
 }
 
 void AEnemyAIBase::OnShipHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)
@@ -19,7 +18,16 @@ void AEnemyAIBase::OnShipHit(AActor* SelfActor, AActor* OtherActor, FVector Norm
 
 void AEnemyAIBase::Fire()
 {
-	
+	this->GetShip()->GetWeaponComponent()->Fire(FVector2D(-1, 0), TEXT("Enemy"));
 }
 
-
+AShip* AEnemyAIBase::GetShip()
+{
+	if (this->Ship == nullptr) {
+		this->Ship = Cast<AEnemyShipBase>(this->GetCharacter());
+		return this->Ship;
+	}
+	else {
+		return this->Ship;
+	}
+}

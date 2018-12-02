@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Ship.h"
 #include "EnemyAIBase.generated.h"
 
 /**
@@ -13,6 +14,8 @@ UCLASS()
 class SPACEAGE_API AEnemyAIBase : public AAIController
 {
 	GENERATED_BODY()
+
+	AShip* Ship;
 	
 protected:
 
@@ -27,6 +30,8 @@ protected:
 
 	UFUNCTION()
 	virtual void Fire();
+
+	AShip* GetShip();
 
 public:
 

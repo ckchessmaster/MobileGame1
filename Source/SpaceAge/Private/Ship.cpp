@@ -19,6 +19,29 @@ AShip::AShip() : Super()
 
 	// Setup collision
 	this->GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
+
+	// Setup weapon component
+	WeaponComponent = CreateDefaultSubobject<UWeaponComponent>(TEXT("Weapon"));
+
+	// Misc.
+	this->bCanBeDamaged = true;
+}
+
+float AShip::TakeDamage(
+	float DamageAmount, 
+	struct FDamageEvent const& DamageEvent, 
+	class AController* EventInstigator, 
+	AActor* DamageCauser)
+{
+	Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
+	this->Health -= DamageAmount;
+
+	if (this->Health <= 0) {
+		this->Destroy();
+	}
+
+	return DamageAmount;
 }
 
 void AShip::MoveHorizontal(float value) 
@@ -30,3 +53,5 @@ void AShip::MoveVertical(float value)
 {
 	AddMovementInput(FVector(1.0f, 0.0f, 0.0f), value * this->MovementMultiplier);
 }
+
+
