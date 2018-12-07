@@ -21,7 +21,7 @@ class SPACEAGE_API AShip : public APaperCharacter
 protected:
 
 	UPROPERTY(EditAnywhere)
-	class UWeaponComponent* WeaponComponent;
+	UWeaponComponent* WeaponComponent;
 
 	// Used to scale input movement
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Movement")

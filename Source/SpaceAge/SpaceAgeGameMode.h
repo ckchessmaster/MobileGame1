@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "Public/ShipPlacementGrid.h"
 #include "SpaceAgeGameMode.generated.h"
 
 /**
@@ -16,6 +17,24 @@ UCLASS(minimalapi)
 class ASpaceAgeGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
+
+	UShipPlacementGrid* NextWave;
+	UShipPlacementGrid* CurrentWave;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UShipPlacementGrid> InitialWaveType;
+
+	UShipPlacementGrid* InitialWave;
+
+	// Lets try and make this async/not in the main thread at some point
+	void LoadNextWave();
+
 public:
 	ASpaceAgeGameMode();
+
+	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaTime) override;
+
+	virtual void OnEnemyShipDestroyed();
 };
