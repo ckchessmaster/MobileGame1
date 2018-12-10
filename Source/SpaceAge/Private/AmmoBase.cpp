@@ -6,7 +6,7 @@
 #include "EnemyShipBase.h"
 #include "PaperFlipbookComponent.h"
 
-AAmmoBase::AAmmoBase()
+AAmmoBase::AAmmoBase() : Super()
 {
 	// Orient the sprite to the camera
 	this->SetActorRotation(FRotator(0.0f, -90.0f, 90.0f));

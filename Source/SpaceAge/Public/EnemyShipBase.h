@@ -14,5 +14,6 @@ class SPACEAGE_API AEnemyShipBase : public AShip
 {
 	GENERATED_BODY()
 
-
+public:
+	AEnemyShipBase();
 };

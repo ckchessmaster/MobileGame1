@@ -10,9 +10,10 @@ void UShipPlacementGrid::SpawnWave()
 		FVector2D mappedCoordiantes = this->MapCoordinates(shipToSpawn.Key);
 
 		FVector spawnLocation(mappedCoordiantes.X, mappedCoordiantes.Y, 0.0f);
-		FRotator spawnRotation;
+		FRotator rotation(0.0f);
+		FActorSpawnParameters spawnParameters;
 
-		this->World->SpawnActor(shipToSpawn.Value, &spawnLocation, &spawnRotation, FActorSpawnParameters());
+		this->World->SpawnActor(shipToSpawn.Value, &spawnLocation, &rotation, spawnParameters);
 	}
 }
 

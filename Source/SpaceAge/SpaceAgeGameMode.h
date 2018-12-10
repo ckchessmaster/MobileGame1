@@ -22,9 +22,7 @@ class ASpaceAgeGameMode : public AGameModeBase
 	UShipPlacementGrid* CurrentWave;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<UShipPlacementGrid> InitialWaveType;
-
-	UShipPlacementGrid* InitialWave;
+	TArray<TSubclassOf<UShipPlacementGrid>> Waves;
 
 	// Lets try and make this async/not in the main thread at some point
 	void LoadNextWave();

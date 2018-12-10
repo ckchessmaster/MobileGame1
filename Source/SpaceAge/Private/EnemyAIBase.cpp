@@ -4,12 +4,12 @@
 #include "EnemyShipBase.h"
 #include "Engine.h"
 
-void AEnemyAIBase::BeginPlay()
+void AEnemyAIBase::Possess(APawn* InPawn)
 {
-	Super::BeginPlay();
+	Super::Possess(InPawn);
 
 	// Start listening to ships overlap events
-	this->GetShip()->OnActorHit.AddDynamic(this, &AEnemyAIBase::OnShipHit);
+	Cast<AEnemyShipBase>(InPawn)->OnActorHit.AddDynamic(this, &AEnemyAIBase::OnShipHit);
 }
 
 void AEnemyAIBase::OnShipHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)
