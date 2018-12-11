@@ -34,5 +34,6 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void OnEnemyShipDestroyed();
+	UFUNCTION()
+	virtual void OnEnemyShipDestroyed(AShip* destroyedShip);
 };

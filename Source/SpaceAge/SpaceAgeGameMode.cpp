@@ -8,6 +8,7 @@ ASpaceAgeGameMode::ASpaceAgeGameMode() : Super()
 {
 	// Set default pawn class to our character
 	DefaultPawnClass = ASpaceAgeCharacter::StaticClass();
+	this->SetActorTickEnabled(true);
 }
 
 void ASpaceAgeGameMode::BeginPlay()
@@ -41,11 +42,12 @@ void ASpaceAgeGameMode::LoadNextWave()
 	if (this->Waves.Num() > 0) {
 		this->NextWave = NewObject<UShipPlacementGrid>(this, this->Waves[0]);
 		this->NextWave->SetWorld(this->GetWorld());
+		this->NextWave->OnShipDestroyedEvent.AddDynamic(this, &ASpaceAgeGameMode::OnEnemyShipDestroyed);
 		this->Waves.RemoveAt(0);
 	}
 }
 
-void ASpaceAgeGameMode::OnEnemyShipDestroyed()
+void ASpaceAgeGameMode::OnEnemyShipDestroyed(AShip* destroyedShip)
 {
 	this->CurrentWave->SetRemainingShips(this->CurrentWave->GetRemainingShips() - 1);
 }

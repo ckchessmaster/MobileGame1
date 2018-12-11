@@ -13,7 +13,9 @@ void UShipPlacementGrid::SpawnWave()
 		FRotator rotation(0.0f);
 		FActorSpawnParameters spawnParameters;
 
-		this->World->SpawnActor(shipToSpawn.Value, &spawnLocation, &rotation, spawnParameters);
+		AActor* spawnedShip = this->World->SpawnActor(shipToSpawn.Value, &spawnLocation, &rotation, spawnParameters);
+		spawnedShip->OnDestroyed.AddDynamic(this, &UShipPlacementGrid::OnShipDestroyed);
+		this->RemainingShips++;
 	}
 }
 
@@ -23,4 +25,9 @@ FVector2D UShipPlacementGrid::MapCoordinates(const FVector2D coordinates)
 	float mappedY = (coordinates.Y * this->MappingFactor.Y) + this->MapingOffset.Y;
 
 	return FVector2D(mappedX, mappedY);
+}
+
+void UShipPlacementGrid::OnShipDestroyed(AActor* DestroyedActor)
+{
+	this->OnShipDestroyedEvent.Broadcast(Cast<AShip>(DestroyedActor));
 }
