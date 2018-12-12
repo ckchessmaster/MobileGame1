@@ -46,5 +46,7 @@ public:
 	/** Called for up and down input */
 	virtual void MoveVertical(float value);
 
+	virtual void Move(FVector2D value);
+
 	UWeaponComponent* GetWeaponComponent() { return this->WeaponComponent; }
 };
