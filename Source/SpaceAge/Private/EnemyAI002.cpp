@@ -12,16 +12,16 @@ void AEnemyAI002::BeginPlay()
 	switch (FMath::RandRange(0, 3))
 	{
 	case 0:
-		this->MovementVector = FVector2D(1, 1);
+		this->MovementVector = FVector(1.0f, 1.0f, 0.0f);
 		break;
 	case 1:
-		this->MovementVector = FVector2D(-1, -1);
+		this->MovementVector = FVector(-1.0f, -1.0f, 0.0f);
 		break;
 	case 2:
-		this->MovementVector = FVector2D(-1, 1);
+		this->MovementVector = FVector(-1.0f, 1.0f, 0.0f);
 		break;
 	case 3:
-		this->MovementVector = FVector2D(1, -1);
+		this->MovementVector = FVector(1.0f, -1.0f, 0.0f);
 		break;
 	}
 }
@@ -39,16 +39,16 @@ void AEnemyAI002::Tick(float DeltaTime)
 		switch (FMath::RandRange(0, 3))
 		{
 		case 0:
-			this->MovementVector = FVector2D(1, 1);
+			this->MovementVector = FVector(1.0f, 1.0f, 0.0f);
 			break;
 		case 1:
-			this->MovementVector = FVector2D(-1, -1);
+			this->MovementVector = FVector(-1.0f, -1.0f, 0.0f);
 			break;
 		case 2:
-			this->MovementVector = FVector2D(-1, 1);
+			this->MovementVector = FVector(-1.0f, 1.0f, 0.0f);
 			break;
 		case 3:
-			this->MovementVector = FVector2D(1, -1);
+			this->MovementVector = FVector(1.0f, -1.0f, 0.0f);
 			break;
 		}
 	}
@@ -62,35 +62,11 @@ void AEnemyAI002::Tick(float DeltaTime)
 
 void AEnemyAI002::OnShipHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)
 {
-	// TODO: make us go towards the center of the screen on hit
-	// If we hit the edge of the screen reverse direction
-	if (Cast<ABlockingVolume>(OtherActor) != nullptr)
+	// If we hit the edge of the screen change direction also make sure we are not stuck on an edge
+	if (Cast<ABlockingVolume>(OtherActor) != nullptr && this->RecentlyHitActor != OtherActor)
 	{
-		switch (FMath::RandRange(0, 3))
-		{
-		case 0:
-			if (!this->MovementVector.Equals(FVector2D(1, 1))) {
-				this->MovementVector = FVector2D(1, 1);
-				break;
-			}
-		case 1:
-			if (!this->MovementVector.Equals(FVector2D(-1, -1))) {
-				this->MovementVector = FVector2D(-1, -1);
-				break;
-			}
-		case 2:
-			if (!this->MovementVector.Equals(FVector2D(-1, 1))) {
-				this->MovementVector = FVector2D(-1, 1);
-				break;
-			}
-		case 3:
-			if (!this->MovementVector.Equals(FVector2D(1, -1))) {
-				this->MovementVector = FVector2D(1, -1);
-				break;
-			}
-		default:
-			this->MovementVector = FVector2D(1, 1);
-		}
+		this->MovementVector = FMath::GetReflectionVector(this->MovementVector, Hit.ImpactNormal);
+		this->RecentlyHitActor = OtherActor;
 	}
 }
 

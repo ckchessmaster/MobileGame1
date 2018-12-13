@@ -54,8 +54,8 @@ void AShip::MoveVertical(float value)
 	AddMovementInput(FVector(1.0f, 0.0f, 0.0f), value * this->MovementMultiplier);
 }
 
-void AShip::Move(FVector2D value)
+void AShip::Move(FVector value)
 {
-	AddMovementInput(FVector(value.X, value.Y, 0.0f), this->MovementMultiplier);
+	AddMovementInput(value, this->MovementMultiplier);
 }
 

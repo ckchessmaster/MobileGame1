@@ -13,9 +13,11 @@ UCLASS()
 class SPACEAGE_API AEnemyAI002 : public AEnemyAIBase
 {
 	GENERATED_BODY()
-	
+
+	AActor* RecentlyHitActor;
+
 protected:
-	FVector2D MovementVector;
+	FVector MovementVector;
 
 	virtual void OnShipHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit) override;
 
