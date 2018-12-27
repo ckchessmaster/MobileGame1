@@ -9,7 +9,7 @@ void AEnemyAIBase::Possess(APawn* InPawn)
 	Super::Possess(InPawn);
 
 	// Start listening to ships overlap events
-	Cast<AEnemyShipBase>(InPawn)->OnActorHit.AddDynamic(this, &AEnemyAIBase::OnShipHit);
+	InPawn->OnActorHit.AddDynamic(this, &AEnemyAIBase::OnShipHit);
 }
 
 void AEnemyAIBase::OnShipHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)

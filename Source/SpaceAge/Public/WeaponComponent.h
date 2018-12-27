@@ -15,10 +15,10 @@ class SPACEAGE_API UWeaponComponent : public UActorComponent
 
 protected:
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Weapon")
 	TSubclassOf<AAmmoBase> AmmoType;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Weapon")
 	float AmmoVelocity = 100.0f;
 
 public:	
@@ -26,4 +26,8 @@ public:
 	UWeaponComponent();
 	
 	virtual void Fire(FVector2D direction, FName owner);
+
+	virtual void SetAmmoType(TSubclassOf<AAmmoBase> ammoType) { this->AmmoType = ammoType; }
+
+	virtual TSubclassOf<AAmmoBase> GetAmmoType() { return this->AmmoType; }
 };

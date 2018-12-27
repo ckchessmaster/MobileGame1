@@ -31,6 +31,8 @@ AAmmoBase::AAmmoBase() : Super()
 
 void AAmmoBase::NotifyActorBeginOverlap(AActor* OtherActor) 
 {
+	Super::NotifyActorBeginOverlap(OtherActor);
+
 	if (OtherActor->IsA<APrimaryPlayerShip>() && this->Tags.Contains(TEXT("Enemy"))) {
 		OtherActor->TakeDamage(1.0f, FDamageEvent(), nullptr, this);
 
@@ -48,5 +50,4 @@ void AAmmoBase::NotifyActorBeginOverlap(AActor* OtherActor)
 	else if (OtherActor->IsA<ABlockingVolume>() && !OtherActor->Tags.Contains("PlayerBlock") && this->bAutoDestroyOnOverlap) {
 		this->Destroy();
 	}
-	
 }

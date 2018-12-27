@@ -19,6 +19,9 @@ class SPACEAGE_API APrimaryPlayerShip : public AShip
 protected:
 
 	UPROPERTY(EditAnywhere)
+	TArray<TSubclassOf<AAmmoBase>> WeaponUpgradeList;
+
+	UPROPERTY(EditAnywhere)
 	int TicksBetweenAttacks = 120;
 
 	// APawn interface
@@ -27,6 +30,9 @@ protected:
 
 public:
 
+	virtual void BeginPlay() override;
+
 	virtual void Tick(float DeltaTime) override;
 	
+	virtual void UpgradeAmmo();
 };

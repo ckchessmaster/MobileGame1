@@ -1,11 +1,21 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "PrimaryPlayerShip.h"
+#include "Engine.h"
 
 void APrimaryPlayerShip::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	PlayerInputComponent->BindAxis("MoveHorizontal", this, &APrimaryPlayerShip::MoveHorizontal);
 	PlayerInputComponent->BindAxis("MoveVertical", this, &APrimaryPlayerShip::MoveVertical);
+}
+
+void APrimaryPlayerShip::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (this->WeaponUpgradeList.Num() > 0) {
+		this->WeaponComponent->SetAmmoType(this->WeaponUpgradeList[0]);
+	}
 }
 
 void APrimaryPlayerShip::Tick(float DeltaTime)
@@ -18,5 +28,15 @@ void APrimaryPlayerShip::Tick(float DeltaTime)
 	}
 	else {
 		this->TicksSinceLastAttack++;
+	}
+}
+
+void APrimaryPlayerShip::UpgradeAmmo()
+{
+	int weaponIndex = this->WeaponUpgradeList.IndexOfByKey(this->WeaponComponent->GetAmmoType());
+	
+	// Only upgrade if there is another weapon to choose from
+	if (this->WeaponUpgradeList.Num() > weaponIndex + 1) {
+		this->WeaponComponent->SetAmmoType(this->WeaponUpgradeList[weaponIndex + 1]);
 	}
 }
