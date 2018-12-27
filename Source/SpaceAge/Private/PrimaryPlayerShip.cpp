@@ -31,6 +31,30 @@ void APrimaryPlayerShip::Tick(float DeltaTime)
 	}
 }
 
+float APrimaryPlayerShip::TakeDamage(
+	float DamageAmount,
+	struct FDamageEvent const& DamageEvent,
+	class AController* EventInstigator,
+	AActor* DamageCauser)
+{
+	APaperCharacter::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
+	this->Health -= DamageAmount;
+
+	// If we are dead return immediantly
+	if (this->Health <= 0) {
+		this->Destroy();
+		return DamageAmount;
+	}
+
+	// Downgrade our ammo
+	if (int weaponIndex = this->WeaponUpgradeList.IndexOfByKey(this->WeaponComponent->GetAmmoType()) != 0) {
+		this->WeaponComponent->SetAmmoType(this->WeaponUpgradeList[weaponIndex - 1]);
+	}
+
+	return DamageAmount;
+}
+
 void APrimaryPlayerShip::UpgradeAmmo()
 {
 	int weaponIndex = this->WeaponUpgradeList.IndexOfByKey(this->WeaponComponent->GetAmmoType());
@@ -39,4 +63,6 @@ void APrimaryPlayerShip::UpgradeAmmo()
 	if (this->WeaponUpgradeList.Num() > weaponIndex + 1) {
 		this->WeaponComponent->SetAmmoType(this->WeaponUpgradeList[weaponIndex + 1]);
 	}
+
+	this->Health++;
 }
