@@ -12,7 +12,7 @@ void ACombinationAmmoBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Make sure that an initial velocity has been set
+	// Make sure that an initial velocity has been set 
 	if (this->GetProjectileMovementComponent()->Velocity != FVector(1.0f, 0.0f, 0.0f))
 	{
 		for (const TPair<FVector2D, TSubclassOf<AAmmoBase>> ammoToSpawn : this->SubAmmoSpawnList) {
