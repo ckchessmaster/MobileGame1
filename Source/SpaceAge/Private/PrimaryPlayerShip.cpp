@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "PrimaryPlayerShip.h"
+#include "SpaceAgeGameMode.h"
 #include "Engine.h"
 
 void APrimaryPlayerShip::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -41,9 +42,14 @@ float APrimaryPlayerShip::TakeDamage(
 
 	this->Health -= DamageAmount;
 
-	// If we are dead return immediantly
+	// If we are dead then the game ends
 	if (this->Health <= 0) {
-		this->Destroy();
+		this->SetActorHiddenInGame(true);
+
+		// Do destroy animation here
+
+		this->GetWorld()->GetAuthGameMode<ASpaceAgeGameMode>()->GameOver();
+
 		return DamageAmount;
 	}
 

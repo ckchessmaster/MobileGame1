@@ -51,3 +51,13 @@ void ASpaceAgeGameMode::OnEnemyShipDestroyed(AShip* destroyedShip)
 {
 	this->CurrentWave->SetRemainingShips(this->CurrentWave->GetRemainingShips() - 1);
 }
+
+void ASpaceAgeGameMode::GameOver()
+{
+	// Pause the game
+	APlayerController* player = this->GetWorld()->GetFirstPlayerController();
+	player->SetPause(true);
+
+	// Call blueprint event
+	this->OnGameOver();
+}

@@ -36,4 +36,9 @@ public:
 
 	UFUNCTION()
 	virtual void OnEnemyShipDestroyed(AShip* destroyedShip);
+
+	virtual void GameOver();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnGameOver();
 };
