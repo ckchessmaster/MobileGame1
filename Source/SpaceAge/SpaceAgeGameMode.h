@@ -27,6 +27,12 @@ class ASpaceAgeGameMode : public AGameModeBase
 	// Lets try and make this async/not in the main thread at some point
 	void LoadNextWave();
 
+protected:
+	virtual void Win();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnWin();
+
 public:
 	ASpaceAgeGameMode();
 
