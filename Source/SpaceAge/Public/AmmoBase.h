@@ -18,14 +18,20 @@ class SPACEAGE_API AAmmoBase : public APaperFlipbookActor
 	
 protected:
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Attack")
 	class UProjectileMovementComponent* ProjectileMovementComponent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Collision")
 	UCapsuleComponent* CapsuleComponent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Collision")
 	bool bAutoDestroyOnOverlap = true;
+
+	UPROPERTY(EditAnywhere, Category = "Attack")
+	float Damage = 1.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Attack")
+	float Velocity = 500.0f;
 	
 public:
 
@@ -34,4 +40,6 @@ public:
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
 	UProjectileMovementComponent* GetProjectileMovementComponent() { return this->ProjectileMovementComponent; }
+
+	float GetVelocity() { return this->Velocity; }
 };

@@ -11,3 +11,7 @@ y = (X * 50) - 800
 
 Y:
 y = (X * 50) - 1000
+
+Health values:
+Basic enemy - 2
+Green zig zag - 4

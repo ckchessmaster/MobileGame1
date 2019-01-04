@@ -34,14 +34,14 @@ void AAmmoBase::NotifyActorBeginOverlap(AActor* OtherActor)
 	Super::NotifyActorBeginOverlap(OtherActor);
 
 	if (OtherActor->IsA<APrimaryPlayerShip>() && this->Tags.Contains(TEXT("Enemy"))) {
-		OtherActor->TakeDamage(1.0f, FDamageEvent(), nullptr, this);
+		OtherActor->TakeDamage(this->Damage, FDamageEvent(), nullptr, this);
 
 		if (this->bAutoDestroyOnOverlap) {
 			this->Destroy();
 		}
 	}
 	else if (OtherActor->IsA<AEnemyShipBase>() && this->Tags.Contains(TEXT("Player"))) {
-		OtherActor->TakeDamage(1.0f, FDamageEvent(), nullptr, this);
+		OtherActor->TakeDamage(this->Damage, FDamageEvent(), nullptr, this);
 
 		if (this->bAutoDestroyOnOverlap) {
 			this->Destroy();

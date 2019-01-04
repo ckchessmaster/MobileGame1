@@ -18,9 +18,6 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Weapon")
 	TSubclassOf<AAmmoBase> AmmoType;
 
-	UPROPERTY(EditAnywhere, Category = "Weapon")
-	float AmmoVelocity = 100.0f;
-
 public:	
 	// Sets default values for this component's properties
 	UWeaponComponent();

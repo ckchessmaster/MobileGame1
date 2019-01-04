@@ -21,7 +21,7 @@ void UWeaponComponent::Fire(FVector2D direction, FName owner)
 	AAmmoBase* ammo = Cast<AAmmoBase>(GetWorld()->SpawnActor(this->AmmoType, &location, &rotation, spawnParameters));
 	
 	if (ammo != nullptr) {
-		ammo->GetProjectileMovementComponent()->SetVelocityInLocalSpace(FVector(direction.X * this->AmmoVelocity, direction.Y * this->AmmoVelocity, 0.0f));
+		ammo->GetProjectileMovementComponent()->SetVelocityInLocalSpace(FVector(direction.X * ammo->GetVelocity(), direction.Y * ammo->GetVelocity(), 0.0f));
 		ammo->Tags.Add(owner);
 	}
 }
