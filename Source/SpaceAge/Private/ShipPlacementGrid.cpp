@@ -7,15 +7,17 @@
 void UShipPlacementGrid::SpawnWave()
 {
 	for (const TPair<FVector2D, TSubclassOf<AEnemyShipBase>> shipToSpawn : this->Grid) {
-		FVector2D mappedCoordiantes = this->MapCoordinates(shipToSpawn.Key);
+		if (shipToSpawn.Value != nullptr) {
+			FVector2D mappedCoordiantes = this->MapCoordinates(shipToSpawn.Key);
 
-		FVector spawnLocation(mappedCoordiantes.X, mappedCoordiantes.Y, 0.0f);
-		FRotator rotation(0.0f);
-		FActorSpawnParameters spawnParameters;
+			FVector spawnLocation(mappedCoordiantes.X, mappedCoordiantes.Y, 0.0f);
+			FRotator rotation(0.0f);
+			FActorSpawnParameters spawnParameters;
 
-		AActor* spawnedShip = this->World->SpawnActor(shipToSpawn.Value, &spawnLocation, &rotation, spawnParameters);
-		spawnedShip->OnDestroyed.AddDynamic(this, &UShipPlacementGrid::OnShipDestroyed);
-		this->RemainingShips++;
+			AActor* spawnedShip = this->World->SpawnActor(shipToSpawn.Value, &spawnLocation, &rotation, spawnParameters);
+			spawnedShip->OnDestroyed.AddDynamic(this, &UShipPlacementGrid::OnShipDestroyed);
+			this->RemainingShips++;
+		}
 	}
 }
 
