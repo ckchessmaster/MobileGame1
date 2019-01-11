@@ -38,7 +38,6 @@ protected:
 public:
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FShipDestroyedSignature, AShip*, DestroyedShip);
-
 	FShipDestroyedSignature OnShipDestroyedEvent;
 
 	virtual void SpawnWave();

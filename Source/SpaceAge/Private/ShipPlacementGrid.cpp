@@ -31,5 +31,6 @@ FVector2D UShipPlacementGrid::MapCoordinates(const FVector2D coordinates)
 
 void UShipPlacementGrid::OnShipDestroyed(AActor* DestroyedActor)
 {
-	this->OnShipDestroyedEvent.Broadcast(Cast<AShip>(DestroyedActor));
+	this->RemainingShips--;
+	//this->OnShipDestroyedEvent.Broadcast(Cast<AShip>(DestroyedActor));
 }

@@ -18,7 +18,10 @@ void AEnemyAIBase::OnShipHit(AActor* SelfActor, AActor* OtherActor, FVector Norm
 
 void AEnemyAIBase::Fire()
 {
-	this->GetShip()->GetWeaponComponent()->Fire(FVector2D(-1, 0), TEXT("Enemy"));
+	AShip* ship = this->GetShip();
+	if (ship != nullptr) {
+		ship->GetWeaponComponent()->Fire(FVector2D(-1, 0), TEXT("Enemy"));
+	}
 }
 
 AShip* AEnemyAIBase::GetShip()

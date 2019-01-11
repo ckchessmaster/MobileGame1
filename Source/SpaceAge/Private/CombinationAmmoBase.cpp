@@ -19,15 +19,18 @@ void ACombinationAmmoBase::Tick(float DeltaTime)
 			FVector spawnLocation = this->GetActorLocation() + FVector(ammoToSpawn.Key, 0.0f);
 			FRotator rotation(0.0f);
 			FActorSpawnParameters spawnParameters;
+			spawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
 			AAmmoBase* spawnedAmmo = Cast<AAmmoBase>(this->GetWorld()->SpawnActor(ammoToSpawn.Value, &spawnLocation, &rotation, spawnParameters));
 
-			// Set the same velocity that this actor has
-			spawnedAmmo->GetProjectileMovementComponent()->SetVelocityInLocalSpace(FVector(this->GetProjectileMovementComponent()->Velocity));
+			if (spawnedAmmo != nullptr) {
+				// Set the same velocity that this actor has
+				spawnedAmmo->GetProjectileMovementComponent()->SetVelocityInLocalSpace(FVector(this->GetProjectileMovementComponent()->Velocity));
 
-			// Add any flags that this actor may have
-			for (const FName tag : this->Tags) {
-				spawnedAmmo->Tags.Add(tag);
+				// Add any flags that this actor may have
+				for (const FName tag : this->Tags) {
+					spawnedAmmo->Tags.Add(tag);
+				}
 			}
 		}
 

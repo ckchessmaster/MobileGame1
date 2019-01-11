@@ -31,7 +31,7 @@ protected:
 	float Damage = 1.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Attack")
-	float Velocity = 500.0f;
+	float ProjectileSpeed = 500.0f;
 	
 public:
 
@@ -41,5 +41,5 @@ public:
 
 	UProjectileMovementComponent* GetProjectileMovementComponent() { return this->ProjectileMovementComponent; }
 
-	float GetVelocity() { return this->Velocity; }
+	float GetProjectileSpeed() { return this->ProjectileSpeed; }
 };

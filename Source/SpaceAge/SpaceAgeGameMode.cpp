@@ -60,7 +60,7 @@ void ASpaceAgeGameMode::LoadNextWave()
 
 void ASpaceAgeGameMode::OnEnemyShipDestroyed(AShip* destroyedShip)
 {
-	this->CurrentWave->SetRemainingShips(this->CurrentWave->GetRemainingShips() - 1);
+	//this->CurrentWave->SetRemainingShips(this->CurrentWave->GetRemainingShips() - 1);
 }
 
 void ASpaceAgeGameMode::Win()
