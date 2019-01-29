@@ -18,7 +18,10 @@ class ASpaceAgeGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
+	UPROPERTY()
 	UShipPlacementGrid* NextWave;
+
+	UPROPERTY()
 	UShipPlacementGrid* CurrentWave;
 
 	UPROPERTY(EditAnywhere)
@@ -39,9 +42,6 @@ public:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION()
-	virtual void OnEnemyShipDestroyed(AShip* destroyedShip);
 
 	virtual void GameOver();
 

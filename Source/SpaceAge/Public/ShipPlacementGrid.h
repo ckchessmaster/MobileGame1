@@ -7,6 +7,18 @@
 #include "EnemyShipBase.h"
 #include "ShipPlacementGrid.generated.h"
 
+USTRUCT()
+struct FShipInfo
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+	FVector2D SpawnLocation;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AEnemyShipBase> ShipType;
+};
+
 /**
  * 
  */
@@ -23,8 +35,8 @@ class SPACEAGE_API UShipPlacementGrid : public UObject
 	
 protected:
 
-	UPROPERTY(EditDefaultsOnly)
-	TMap<FVector2D, TSubclassOf<AEnemyShipBase>> Grid;
+	UPROPERTY(EditAnywhere)
+	TArray<FShipInfo> Grid;
 
 	UPROPERTY(EditDefaultsOnly)
 	FVector2D MappingFactor;
@@ -40,6 +52,7 @@ public:
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FShipDestroyedSignature, AShip*, DestroyedShip);
 	FShipDestroyedSignature OnShipDestroyedEvent;
 
+	UFUNCTION()
 	virtual void SpawnWave();
 	
 	virtual void SetWorld(UWorld* world) { this->World = world; }

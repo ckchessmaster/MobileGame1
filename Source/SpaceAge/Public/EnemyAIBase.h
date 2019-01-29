@@ -15,6 +15,7 @@ class SPACEAGE_API AEnemyAIBase : public AAIController
 {
 	GENERATED_BODY()
 
+	UPROPERTY()
 	AShip* Ship;
 	
 protected:

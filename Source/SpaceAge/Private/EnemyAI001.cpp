@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "EnemyAI001.h"
-#include "EnemyShipBase.h"
 #include "Engine/BlockingVolume.h"
 #include "Engine.h"
 
@@ -26,12 +25,12 @@ void AEnemyAI001::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	// We want to move every tick
-	this->GetShip()->MoveHorizontal(this->MovementVector.Y);
+	this->GetShip()->Move(FVector(this->MovementVector, 0.0f));
 
 	// Determine if we should change direction
 	if (FMath::RandRange(0, this->DirectionChangeFactor) == 1) 
 	{
-		this->MovementVector *= -1;
+		this->MovementVector.Y *= -1;
 	}
 
 	// Determine if we should fire
@@ -46,7 +45,7 @@ void AEnemyAI001::OnShipHit(AActor* SelfActor, AActor* OtherActor, FVector Norma
 	// If we hit the edge of the screen reverse direction
 	if (Cast<ABlockingVolume>(OtherActor) != nullptr)
 	{
-		this->MovementVector *= -1;
+		this->MovementVector.Y *= -1;
 	}
 }
 

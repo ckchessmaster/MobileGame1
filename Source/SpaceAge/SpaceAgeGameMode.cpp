@@ -33,7 +33,7 @@ void ASpaceAgeGameMode::Tick(float DeltaTime)
 	// Should we move to the next wave?
 	if (this->CurrentWave->GetRemainingShips() <= 0) {
 		
-		if (this->NextWave != nullptr) {
+		if (this->NextWave->IsValidLowLevel()) {
 			this->NextWave->SpawnWave();
 			this->CurrentWave = this->NextWave;
 			this->LoadNextWave();
@@ -50,17 +50,11 @@ void ASpaceAgeGameMode::LoadNextWave()
 	if (this->Waves.Num() > 0) {
 		this->NextWave = NewObject<UShipPlacementGrid>(this, this->Waves[0]);
 		this->NextWave->SetWorld(this->GetWorld());
-		this->NextWave->OnShipDestroyedEvent.AddDynamic(this, &ASpaceAgeGameMode::OnEnemyShipDestroyed);
 		this->Waves.RemoveAt(0);
 	}
 	else {
 		this->NextWave = nullptr;
 	}
-}
-
-void ASpaceAgeGameMode::OnEnemyShipDestroyed(AShip* destroyedShip)
-{
-	//this->CurrentWave->SetRemainingShips(this->CurrentWave->GetRemainingShips() - 1);
 }
 
 void ASpaceAgeGameMode::Win()
