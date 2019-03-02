@@ -15,13 +15,13 @@ void ACombinationAmmoBase::Tick(float DeltaTime)
 	// Make sure that an initial velocity has been set 
 	if (this->GetProjectileMovementComponent()->Velocity != FVector(1.0f, 0.0f, 0.0f))
 	{
-		for (const TPair<FVector2D, TSubclassOf<AAmmoBase>> ammoToSpawn : this->SubAmmoSpawnList) {
-			FVector spawnLocation = this->GetActorLocation() + FVector(ammoToSpawn.Key, 0.0f);
+		for (const FAmmoInfo ammoToSpawn : this->SubAmmoSpawnList) {
+			FVector spawnLocation = this->GetActorLocation() + FVector(ammoToSpawn.OffsetLocation, 0.0f);
 			FRotator rotation(0.0f);
 			FActorSpawnParameters spawnParameters;
 			spawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-			AAmmoBase* spawnedAmmo = Cast<AAmmoBase>(this->GetWorld()->SpawnActor(ammoToSpawn.Value, &spawnLocation, &rotation, spawnParameters));
+			AAmmoBase* spawnedAmmo = Cast<AAmmoBase>(this->GetWorld()->SpawnActor(ammoToSpawn.AmmoType, &spawnLocation, &rotation, spawnParameters));
 
 			if (spawnedAmmo != nullptr) {
 				// Set the same velocity that this actor has

@@ -6,6 +6,18 @@
 #include "AmmoBase.h"
 #include "CombinationAmmoBase.generated.h"
 
+USTRUCT()
+struct FAmmoInfo
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere)
+	FVector2D OffsetLocation;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AAmmoBase> AmmoType;
+};
+
 /**
  * 
  */
@@ -17,7 +29,7 @@ class SPACEAGE_API ACombinationAmmoBase : public AAmmoBase
 protected:
 
 	UPROPERTY(EditAnywhere)
-	TMap<FVector2D, TSubclassOf<AAmmoBase>> SubAmmoSpawnList;
+	TArray<FAmmoInfo> SubAmmoSpawnList;
 	
 public:
 
