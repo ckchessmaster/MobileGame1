@@ -14,7 +14,7 @@ class SPACEAGE_API AEnemyAISideScrollerHoming : public AEnemyAI001
 {
 	GENERATED_BODY()
 
-	FVector2D FindMovementVector();
+	virtual FVector2D FindMovementVector();
 
 	AActor* PlayerShip;
 	AActor* GetPlayerShip();

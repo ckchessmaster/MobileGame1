@@ -35,11 +35,11 @@ FVector2D AEnemyAISideScrollerHoming::FindMovementVector()
 
 	if (playerLocation.Y > enemyLocation.Y)
 	{
-		newVector = FVector2D(0, 1);
+		newVector = FVector2D(newVector.X, 1);
 	}
 	else if (playerLocation.Y < enemyLocation.Y)
 	{
-		newVector = FVector2D(0, -1);
+		newVector = FVector2D(newVector.X, -1);
 	}
 
 	return newVector;
