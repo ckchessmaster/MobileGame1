@@ -19,6 +19,7 @@ void ASpaceAgeGameMode::BeginPlay()
 
 	// Load and spawn the first wave
 	this->LoadNextWave();
+	this->NextWave->Init();
 	this->NextWave->SpawnWave();
 	this->CurrentWave = this->NextWave;
 
@@ -34,6 +35,7 @@ void ASpaceAgeGameMode::Tick(float DeltaTime)
 	if (this->CurrentWave->GetRemainingShips() <= 0) {
 		
 		if (this->NextWave->IsValidLowLevel()) {
+			this->NextWave->Init();
 			this->NextWave->SpawnWave();
 			this->CurrentWave = this->NextWave;
 			this->LoadNextWave();

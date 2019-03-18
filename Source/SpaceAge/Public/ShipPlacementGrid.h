@@ -27,11 +27,7 @@ class SPACEAGE_API UShipPlacementGrid : public UObject
 {
 	GENERATED_BODY()
 	
-	int RemainingShips;
-
-	UWorld* World;
-
-	FVector2D MapCoordinates(const FVector2D coordinates);
+	
 	
 protected:
 
@@ -44,13 +40,21 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	FVector2D MapingOffset;
 
+	int RemainingShips;
+
+	UWorld* World;
+
+	FVector2D MapCoordinates(const FVector2D coordinates);
+
 	UFUNCTION()
 	virtual void OnShipDestroyed(AActor* DestroyedActor);
 
 public:
 
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FShipDestroyedSignature, AShip*, DestroyedShip);
-	FShipDestroyedSignature OnShipDestroyedEvent;
+	//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FShipDestroyedSignature, AShip*, DestroyedShip);
+	//FShipDestroyedSignature OnShipDestroyedEvent;
+
+	virtual void Init();
 
 	UFUNCTION()
 	virtual void SpawnWave();

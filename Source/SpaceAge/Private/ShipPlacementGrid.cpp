@@ -3,6 +3,10 @@
 #include "ShipPlacementGrid.h"
 //#include "Engine.h"
 
+void UShipPlacementGrid::Init()
+{
+
+}
 
 void UShipPlacementGrid::SpawnWave()
 {

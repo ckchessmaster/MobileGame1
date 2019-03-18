@@ -14,6 +14,13 @@ class SPACEAGE_API AEnemyShipBase : public AShip
 {
 	GENERATED_BODY()
 
+protected:
+
+	UPROPERTY(EditAnywhere)
+	int ShipStrength;
+
 public:
 	AEnemyShipBase();
+
+	int GetShipStrength() { return this->ShipStrength; }
 };
